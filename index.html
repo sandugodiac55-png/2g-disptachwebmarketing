@@ -9,6 +9,7 @@
 <meta property="og:description" content="Loads, rates, paperwork. No contract, no forced dispatch. 48 states.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://2gdispatch.com">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230F1729%22%2F%3E%3Cpolygon%20points%3D%2235.5%2C14.9%2064.5%2C14.9%2058.8%2C28.75%2041.2%2C28.75%22%20fill%3D%22%23EDF1F7%22%2F%3E%3Cpolygon%20points%3D%2264.5%2C14.9%2085.1%2C35.5%2071.25%2C41.2%2058.8%2C28.75%22%20fill%3D%22%2398A4B6%22%2F%3E%3Cpolygon%20points%3D%2214.9%2C35.5%2035.5%2C14.9%2041.2%2C28.75%2028.75%2C41.2%22%20fill%3D%22%23C3CCDA%22%2F%3E%3Cpolygon%20points%3D%2214.9%2C64.5%2014.9%2C35.5%2028.75%2C41.2%2028.75%2C58.8%22%20fill%3D%22%23EDF1F7%22%2F%3E%3Cpolygon%20points%3D%2235.5%2C85.1%2014.9%2C64.5%2028.75%2C58.8%2041.2%2C71.25%22%20fill%3D%22%23FF5A1F%22%2F%3E%3Cpolygon%20points%3D%2264.5%2C85.1%2035.5%2C85.1%2041.2%2C71.25%2058.8%2C71.25%22%20fill%3D%22%23C3CCDA%22%2F%3E%3Cpolygon%20points%3D%2285.1%2C64.5%2064.5%2C85.1%2058.8%2C71.25%2071.25%2C58.8%22%20fill%3D%22%2398A4B6%22%2F%3E%3Cpolygon%20points%3D%2246%2C45%2083%2C45%2083%2C52%2046%2C52%22%20fill%3D%22%23EDF1F7%22%2F%3E%3Cpolygon%20points%3D%2246%2C52%2083%2C52%2083%2C59%2062%2C59%22%20fill%3D%22%2398A4B6%22%2F%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;125,600;125,700;125,800&display=swap" rel="stylesheet">
@@ -43,7 +44,7 @@ a{color:inherit;text-decoration:none}
 header{position:sticky;top:0;z-index:60;background:rgba(8,13,24,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
 .hd{display:flex;align-items:center;justify-content:space-between;gap:18px;height:66px}
 .logo{display:flex;align-items:center;gap:11px}
-.mark{width:32px;height:32px;flex:none}
+.mark{width:34px;height:34px;flex:none}
 .logo b{font-variation-settings:'wdth' 125;font-weight:800;font-size:21px;letter-spacing:-.02em}
 .logo i{font-style:normal;font-size:10px;color:var(--mute);letter-spacing:.2em;display:block;margin-top:2px}
 .hnav{display:flex;align-items:center;gap:8px}
@@ -195,17 +196,28 @@ footer a:hover{color:#fff}
 <header>
   <div class="wrap hd">
     <a class="logo" href="#top">
-      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" fill="#0F1729" stroke="rgba(255,255,255,.16)"/>
-        <path d="M27 13H16a7 7 0 0 0 0 14h7v-6h-5" fill="none" stroke="#EEF2F8" stroke-width="3.4" stroke-linecap="square"/>
-        <path d="M13 27l6-6" stroke="#FF5A1F" stroke-width="3.4" stroke-linecap="square"/>
+      <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <linearGradient id="mkA" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#F5F8FC"/><stop offset="1" stop-color="#C4CEDC"/></linearGradient>
+          <linearGradient id="mkB" x1="0" y1="0" x2="1" y2=".7"><stop offset="0" stop-color="#DDE4ED"/><stop offset="1" stop-color="#9FABBD"/></linearGradient>
+          <linearGradient id="mkC" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#B2BCCB"/><stop offset="1" stop-color="#7C8899"/></linearGradient>
+          <linearGradient id="mkH" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#FF7A33"/><stop offset="1" stop-color="#E5470B"/></linearGradient>
+        </defs>
+        <polygon points="35.5,14.9 64.5,14.9 58.8,28.75 41.2,28.75" fill="url(#mkA)"/>
+        <polygon points="64.5,14.9 85.1,35.5 71.25,41.2 58.8,28.75" fill="url(#mkC)"/>
+        <polygon points="14.9,35.5 35.5,14.9 41.2,28.75 28.75,41.2" fill="url(#mkB)"/>
+        <polygon points="14.9,64.5 14.9,35.5 28.75,41.2 28.75,58.8" fill="url(#mkA)"/>
+        <polygon points="35.5,85.1 14.9,64.5 28.75,58.8 41.2,71.25" fill="url(#mkH)"/>
+        <polygon points="64.5,85.1 35.5,85.1 41.2,71.25 58.8,71.25" fill="url(#mkB)"/>
+        <polygon points="85.1,64.5 64.5,85.1 58.8,71.25 71.25,58.8" fill="url(#mkC)"/>
+        <polygon points="46,45 83,45 83,52 46,52" fill="url(#mkA)"/>
+        <polygon points="46,52 83,52 83,59 62,59" fill="url(#mkC)"/>
       </svg>
       <span><b>2G Dispatch</b><i>CAR HAULING</i></span>
     </a>
     <nav class="hnav">
       <a class="hlink" href="#services">Services</a>
       <a class="hlink" href="#platform">Platform</a>
-      <a class="hlink" href="https://app.2gdispatch.com">Sign in</a>
       <a class="hcall" href="tel:+13862303363">+1 386 230 3363</a>
     </nav>
   </div>
@@ -287,13 +299,12 @@ footer a:hover{color:#fff}
         <div><h3>Payment status</h3><p>What is invoiced, what is paid, what is overdue — per load and per company.</p></div>
       </div>
 
-      <div class="mock" aria-hidden="true">
-        <div class="mhead">WEEK 41 · AUG 24 – AUG 30</div>
-        <div class="mrow"><span>Gross</span><b>$18,420</b></div>
-        <div class="mrow"><span>Miles</span><b>7,910</b></div>
-        <div class="mrow"><span>Rate per mile</span><b class="pos">$2.33</b></div>
-        <div class="mrow"><span>Loads delivered</span><b>26</b></div>
-        <div class="mrow"><span>Awaiting payment</span><b>$4,180</b></div>
+      <div class="mock" role="figure" aria-label="Owner dashboard, best week of the season for one truck">
+        <div class="mhead">BEST WEEK · WEEK 35 · AUG 24 – AUG 30</div>
+        <div class="mrow"><span>Gross</span><b>$21,830</b></div>
+        <div class="mrow"><span>Miles</span><b>4,930</b></div>
+        <div class="mrow"><span>Rate per mile</span><b class="pos">$4.43</b></div>
+        <div class="mrow"><span>Equipment</span><b>9-car hauler</b></div>
         <div class="mrow">
           <span>Last 6 weeks</span>
           <span class="bars"><i style="height:9px"></i><i style="height:15px"></i><i style="height:11px"></i><i style="height:19px"></i><i style="height:16px"></i><i style="height:22px"></i></span>
