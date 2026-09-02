@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2G Dispatch — Car hauling dispatch, 48 states</title>
+<meta name="description" content="Dispatch built only for car haulers. We source loads, negotiate rates, handle broker paperwork, and give every owner a live dashboard. No contract, no forced dispatch.">
+<meta property="og:title" content="2G Dispatch — Car hauling dispatch">
+<meta property="og:description" content="Loads, rates, paperwork. No contract, no forced dispatch. 48 states.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://2gdispatch.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;125,600;125,700;125,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#080D18;
+  --deck:#0F1729;
+  --steel:#18233C;
+  --hazard:#FF5A1F;
+  --chalk:#EEF2F8;
+  --mute:#8494B0;
+  --hair:rgba(255,255,255,.10);
+  --pad:clamp(64px,8vw,116px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--asphalt);color:var(--chalk);
+  font-family:'Archivo',system-ui,sans-serif;font-size:17px;line-height:1.62;
+  font-variation-settings:'wdth' 100;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+h1,h2,h3,.wide{font-variation-settings:'wdth' 125;line-height:.98;letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+:focus-visible{outline:3px solid var(--hazard);outline-offset:4px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* ── header ─────────────────────────────── */
+header{position:sticky;top:0;z-index:60;background:rgba(8,13,24,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:18px;height:66px}
+.logo{display:flex;align-items:center;gap:11px}
+.mark{width:32px;height:32px;flex:none}
+.logo b{font-variation-settings:'wdth' 125;font-weight:800;font-size:21px;letter-spacing:-.02em}
+.logo i{font-style:normal;font-size:10px;color:var(--mute);letter-spacing:.2em;display:block;margin-top:2px}
+.hnav{display:flex;align-items:center;gap:8px}
+.hlink{font-size:15px;color:var(--mute);padding:8px 12px}
+.hlink:hover{color:#fff}
+.hcall{font-variation-settings:'wdth' 125;font-weight:700;font-size:16px;padding:10px 17px;border:1px solid rgba(255,255,255,.28);border-radius:2px;white-space:nowrap}
+.hcall:hover{background:var(--hazard);border-color:var(--hazard)}
+@media(max-width:620px){.hlink{display:none}.logo i{display:none}}
+
+/* ── hero ───────────────────────────────── */
+.hero{position:relative;padding:clamp(56px,8vw,104px) 0 clamp(80px,10vw,140px);overflow:hidden}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(900px 420px at 78% 18%, rgba(255,90,31,.16), transparent 62%),
+    radial-gradient(700px 500px at 8% 92%, rgba(28,58,120,.5), transparent 66%);
+  pointer-events:none;
+}
+.hero .wrap{position:relative;z-index:2}
+.tagrow{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.tagrow span{width:34px;height:2px;background:var(--hazard)}
+.tagrow p{font-size:13px;color:var(--hazard);letter-spacing:.16em;font-weight:600}
+h1{font-size:clamp(44px,8.6vw,104px);font-weight:800;max-width:13ch;text-transform:uppercase}
+h1 em{font-style:normal;display:block;color:var(--hazard)}
+.sub{margin-top:26px;max-width:52ch;font-size:clamp(17px,2vw,20px);color:#B7C4DA}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.btn{font-variation-settings:'wdth' 125;font-weight:700;font-size:17px;padding:15px 30px;border-radius:2px;border:1px solid transparent;cursor:pointer;display:inline-block}
+.b-h{background:var(--hazard);color:#fff}
+.b-h:hover{background:#ff7440}
+.b-o{border-color:rgba(255,255,255,.3);color:#fff}
+.b-o:hover{background:rgba(255,255,255,.08)}
+
+/* deck illustration */
+.deck{position:absolute;right:-6%;bottom:-4%;width:min(760px,64vw);opacity:.9;z-index:1;pointer-events:none}
+@media(max-width:900px){.deck{position:relative;right:auto;bottom:auto;width:100%;margin-top:44px;opacity:1}}
+.dline{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.5s .25s cubic-bezier(.4,0,.2,1) forwards}
+.dcar{opacity:0;animation:pop .5s forwards}
+.dcar:nth-of-type(1){animation-delay:1.0s}
+.dcar:nth-of-type(2){animation-delay:1.12s}
+.dcar:nth-of-type(3){animation-delay:1.24s}
+.dcar:nth-of-type(4){animation-delay:1.36s}
+.dcar:nth-of-type(5){animation-delay:1.48s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+
+/* ── lane ticker ────────────────────────── */
+.ticker{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);background:var(--deck);overflow:hidden;padding:15px 0}
+.tk{display:flex;gap:0;width:max-content;animation:slide 42s linear infinite}
+.ticker:hover .tk{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.lane{display:flex;align-items:center;gap:13px;padding:0 30px;border-right:1px solid var(--hair);white-space:nowrap;font-size:15px}
+.lane b{font-variation-settings:'wdth' 125;font-weight:700;color:#fff}
+.lane u{text-decoration:none;color:var(--hazard);font-weight:600}
+.lane s{text-decoration:none;color:var(--mute);font-size:13px}
+
+/* ── sections ───────────────────────────── */
+section{padding:var(--pad) 0;position:relative}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.eyebrow span{width:26px;height:2px;background:var(--hazard)}
+.eyebrow p{font-size:12px;color:var(--hazard);letter-spacing:.18em;font-weight:600}
+h2{font-size:clamp(30px,5vw,56px);font-weight:700;max-width:17ch;text-transform:uppercase}
+.lede{margin-top:18px;max-width:60ch;color:var(--mute);font-size:18px}
+
+/* services */
+.svc{margin-top:52px;border-top:1px solid var(--hair)}
+.sv{display:grid;grid-template-columns:1fr 1.5fr;gap:34px;padding:28px 0;border-bottom:1px solid var(--hair);transition:background .2s}
+.sv:hover{background:rgba(255,255,255,.025)}
+.sv h3{font-size:clamp(21px,2.6vw,29px);font-weight:700}
+.sv p{color:var(--mute);max-width:56ch}
+@media(max-width:760px){.sv{grid-template-columns:1fr;gap:9px}}
+
+/* platform (light cut) */
+.plat{background:var(--chalk);color:#0B1424;clip-path:polygon(0 4vw,100% 0,100% 100%,0 calc(100% - 4vw))}
+.plat h2,.plat h3{color:#0B1424}
+.plat .lede{color:#4A5A76}
+.plat .eyebrow p{color:#C43D08}
+.plat .eyebrow span{background:#C43D08}
+.pgrid{margin-top:48px;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+@media(max-width:940px){.pgrid{grid-template-columns:1fr;gap:40px}}
+.pfeat{display:grid;gap:26px}
+.pfeat div{padding-left:17px;border-left:3px solid var(--hazard)}
+.pfeat h3{font-size:19px;font-weight:700}
+.pfeat p{color:#4A5A76;font-size:16px;margin-top:5px}
+
+/* dashboard mock */
+.mock{background:#0B1424;border-radius:5px;padding:17px;box-shadow:0 26px 60px rgba(11,20,36,.3)}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:11px 3px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:#B7C4DA}
+.mrow:last-child{border:0}
+.mrow b{font-variation-settings:'wdth' 125;color:#fff;font-weight:600}
+.mhead{font-size:11px;letter-spacing:.15em;color:#7B8CA8;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.12)}
+.bars{display:flex;gap:3px;align-items:flex-end;height:22px}
+.bars i{width:7px;background:var(--hazard);border-radius:1px;display:block}
+.pos{color:#3FD48A}
+
+/* steps */
+.steps{margin-top:52px;display:grid;grid-template-columns:repeat(auto-fit,minmax(226px,1fr));gap:34px}
+.st{border-top:2px solid var(--hazard);padding-top:17px}
+.st b{font-variation-settings:'wdth' 125;font-size:40px;font-weight:800;color:var(--steel);display:block;line-height:1}
+.st h3{font-size:19px;font-weight:700;margin-top:9px}
+.st p{color:var(--mute);font-size:16px;margin-top:7px}
+
+/* terms */
+.terms{background:var(--deck)}
+.tg{margin-top:46px;display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--hair)}
+.tc{background:var(--deck);padding:30px 26px}
+.tc h3{font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--hazard);text-transform:uppercase}
+.tc p{margin-top:11px;color:var(--mute);font-size:16px}
+
+/* form */
+.apply{background:var(--chalk);color:#0B1424;clip-path:polygon(0 4vw,100% 0,100% 100%,0 100%)}
+.apply h2{color:#0B1424}.apply .lede{color:#4A5A76}
+.apply .eyebrow p{color:#C43D08}.apply .eyebrow span{background:#C43D08}
+.fg{margin-top:46px;display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+@media(max-width:900px){.fg{grid-template-columns:1fr;gap:36px}}
+.direct{margin-top:30px;padding-top:24px;border-top:1px solid #C9D3E2}
+.direct a{font-variation-settings:'wdth' 125;font-size:24px;font-weight:700;color:#0B1424;display:block;margin-top:7px}
+.direct a:hover{color:#C43D08}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;color:#5C6C87;margin:15px 0 6px}
+input,select,textarea{
+  width:100%;font-family:inherit;font-size:16px;padding:13px 14px;color:#0B1424;
+  border:1px solid #C4CFDF;border-radius:2px;background:#fff;
+}
+input:focus,select:focus,textarea:focus{border-color:#0B1424;outline:none;box-shadow:0 0 0 3px rgba(255,90,31,.2)}
+textarea{min-height:92px;resize:vertical}
+.send{margin-top:24px;width:100%;background:var(--hazard);color:#fff;border:0;padding:17px;font-size:18px}
+.send:hover{background:#e04a12}
+.note{margin-top:13px;font-size:14px;color:#5C6C87}
+
+/* footer */
+footer{padding:44px 0 110px;border-top:1px solid var(--hair);font-size:15px;color:var(--mute)}
+.ft{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+footer a:hover{color:#fff}
+@media(min-width:761px){footer{padding-bottom:44px}}
+
+/* mobile call bar */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;
+  background:var(--hazard);color:#fff;text-align:center;padding:16px;
+  font-variation-settings:'wdth' 125;font-weight:700;font-size:18px;
+  box-shadow:0 -8px 26px rgba(0,0,0,.4);
+}
+@media(max-width:760px){.callbar{display:block}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="#top">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#0F1729" stroke="rgba(255,255,255,.16)"/>
+        <path d="M27 13H16a7 7 0 0 0 0 14h7v-6h-5" fill="none" stroke="#EEF2F8" stroke-width="3.4" stroke-linecap="square"/>
+        <path d="M13 27l6-6" stroke="#FF5A1F" stroke-width="3.4" stroke-linecap="square"/>
+      </svg>
+      <span><b>2G Dispatch</b><i>CAR HAULING</i></span>
+    </a>
+    <nav class="hnav">
+      <a class="hlink" href="#services">Services</a>
+      <a class="hlink" href="#platform">Platform</a>
+      <a class="hlink" href="https://app.2gdispatch.com">Sign in</a>
+      <a class="hcall" href="tel:+13862303363">+1 386 230 3363</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <svg class="deck" viewBox="0 0 820 380" aria-hidden="true">
+    <g fill="none" stroke="#2C3B5C" stroke-width="3">
+      <path class="dline" d="M30 300 H700 L790 262"/>
+      <path class="dline" d="M60 176 H660 L790 116"/>
+    </g>
+    <g fill="#1B2740" stroke="#38496E" stroke-width="2">
+      <g class="dcar" transform="translate(70,238) rotate(-4)">
+        <path d="M2 44 L14 20 Q19 11 33 10 L88 8 Q104 8 116 18 L142 34 Q148 38 148 43 L148 46 H2 Z"/>
+        <circle cx="36" cy="46" r="9" fill="#0C1220"/><circle cx="118" cy="46" r="9" fill="#0C1220"/>
+      </g>
+      <g class="dcar" transform="translate(258,238) rotate(-4)">
+        <path d="M2 44 L14 20 Q19 11 33 10 L88 8 Q104 8 116 18 L142 34 Q148 38 148 43 L148 46 H2 Z"/>
+        <circle cx="36" cy="46" r="9" fill="#0C1220"/><circle cx="118" cy="46" r="9" fill="#0C1220"/>
+      </g>
+      <g class="dcar" transform="translate(446,238) rotate(-4)">
+        <path d="M2 44 L14 20 Q19 11 33 10 L88 8 Q104 8 116 18 L142 34 Q148 38 148 43 L148 46 H2 Z"/>
+        <circle cx="36" cy="46" r="9" fill="#0C1220"/><circle cx="118" cy="46" r="9" fill="#0C1220"/>
+      </g>
+      <g class="dcar" transform="translate(110,114) rotate(-4)">
+        <path d="M2 44 L14 20 Q19 11 33 10 L88 8 Q104 8 116 18 L142 34 Q148 38 148 43 L148 46 H2 Z" stroke="#FF5A1F"/>
+        <circle cx="36" cy="46" r="9" fill="#0C1220"/><circle cx="118" cy="46" r="9" fill="#0C1220"/>
+      </g>
+      <g class="dcar" transform="translate(300,114) rotate(-4)">
+        <path d="M2 44 L14 20 Q19 11 33 10 L88 8 Q104 8 116 18 L142 34 Q148 38 148 43 L148 46 H2 Z"/>
+        <circle cx="36" cy="46" r="9" fill="#0C1220"/><circle cx="118" cy="46" r="9" fill="#0C1220"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="tagrow"><span></span><p>CAR HAULING ONLY · 48 STATES</p></div>
+    <h1>Keep the deck<em>full.</em></h1>
+    <p class="sub">We work the boards, negotiate every rate, and handle the broker paperwork. You approve the load and you drive. That is the whole arrangement.</p>
+    <div class="acts">
+      <a class="btn b-h" href="#apply">Apply to work with us</a>
+      <a class="btn b-o" href="tel:+13862303363">Call and ask</a>
+    </div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="tk" id="tk"></div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow"><span></span><p>WHAT WE DO</p></div>
+    <h2>Car hauling has its own rules</h2>
+    <p class="lede">Its own brokers, its own paperwork, its own way of getting paid. A general freight dispatcher learns that on your truck. We already know it.</p>
+
+    <div class="svc">
+      <div class="sv"><h3>Load sourcing</h3><p>Boards and direct broker contacts worked daily, filtered for your trailer size and the lanes you want to run. You see loads that pay for the miles, not everything that exists.</p></div>
+      <div class="sv"><h3>Rate negotiation</h3><p>Every load is negotiated before it reaches you. You set a minimum rate per mile and nothing below it gets sent.</p></div>
+      <div class="sv"><h3>Broker setup</h3><p>Carrier packets, agreements, certificates of insurance and W-9s go out from our side. New broker relationships get opened without you making a call.</p></div>
+      <div class="sv"><h3>Paperwork and invoicing</h3><p>Rate confirmations, bills of lading, gate passes, invoices. COD and COP loads tracked so nothing gets delivered with money still owed.</p></div>
+      <div class="sv"><h3>Factoring support</h3><p>We work with your factoring company so invoices go out clean the first time and the cash comes in without a second round of emails.</p></div>
+      <div class="sv"><h3>The difficult calls</h3><p>Detention, damage claims, a broker going quiet on payment. You keep driving. We stay on the phone.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="plat" id="platform">
+  <div class="wrap">
+    <div class="eyebrow"><span></span><p>OUR PLATFORM</p></div>
+    <h2>You see exactly what we see</h2>
+    <p class="lede">Most dispatchers send screenshots on WhatsApp and you find out how the week went on Friday. We built our own system, and every owner gets an account.</p>
+
+    <div class="pgrid">
+      <div class="pfeat">
+        <div><h3>Every load, live</h3><p>Pickup to delivery with the rate, the broker and the current status on one screen.</p></div>
+        <div><h3>Driver payroll</h3><p>Salary slips calculated in the platform, with advances and deductions tracked and archived.</p></div>
+        <div><h3>Weekly numbers</h3><p>Gross, miles and rate per mile for each driver, each week. No spreadsheet, no waiting.</p></div>
+        <div><h3>Payment status</h3><p>What is invoiced, what is paid, what is overdue — per load and per company.</p></div>
+      </div>
+
+      <div class="mock" aria-hidden="true">
+        <div class="mhead">WEEK 41 · AUG 24 – AUG 30</div>
+        <div class="mrow"><span>Gross</span><b>$18,420</b></div>
+        <div class="mrow"><span>Miles</span><b>7,910</b></div>
+        <div class="mrow"><span>Rate per mile</span><b class="pos">$2.33</b></div>
+        <div class="mrow"><span>Loads delivered</span><b>26</b></div>
+        <div class="mrow"><span>Awaiting payment</span><b>$4,180</b></div>
+        <div class="mrow">
+          <span>Last 6 weeks</span>
+          <span class="bars"><i style="height:9px"></i><i style="height:15px"></i><i style="height:11px"></i><i style="height:19px"></i><i style="height:16px"></i><i style="height:22px"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><span></span><p>GETTING STARTED</p></div>
+    <h2>Four steps, then you are running</h2>
+
+    <div class="steps">
+      <div class="st"><b>01</b><h3>We talk</h3><p>Your trailer, your lanes, your minimum rate, what went wrong with the last dispatcher.</p></div>
+      <div class="st"><b>02</b><h3>You send documents</h3><p>MC authority, insurance, W-9. We build the carrier packet and start opening brokers.</p></div>
+      <div class="st"><b>03</b><h3>First load</h3><p>Usually within a day or two. You approve it before anything is booked.</p></div>
+      <div class="st"><b>04</b><h3>You get your login</h3><p>Owner account on the platform, so you watch the week as it happens.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="terms">
+  <div class="wrap">
+    <div class="eyebrow"><span></span><p>THE ARRANGEMENT</p></div>
+    <h2>Nothing you have to sign your way out of</h2>
+
+    <div class="tg">
+      <div class="tc"><h3>No contract</h3><p>Week to week. If it is not working, you say so and we are done. No termination clause, no notice period.</p></div>
+      <div class="tc"><h3>No forced dispatch</h3><p>Every load comes to you first. You say yes or no. Nothing gets booked behind your back.</p></div>
+      <div class="tc"><h3>Percentage of gross</h3><p>We are paid out of what you earn, so a weak rate costs us too. The exact percentage depends on fleet size — ask on the call.</p></div>
+      <div class="tc"><h3>Your authority stays yours</h3><p>Your MC, your insurance, your factoring, your bank account. We dispatch. We do not sit between you and your money.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="apply" id="apply">
+  <div class="wrap fg">
+    <div>
+      <div class="eyebrow"><span></span><p>APPLY</p></div>
+      <h2>Tell us about your truck</h2>
+      <p class="lede">We call back the same day, usually within a couple of hours. Nothing is signed until you have spoken to a person and heard the numbers.</p>
+      <div class="direct">
+        <p class="note">Or reach us directly</p>
+        <a href="tel:+13862303363">+1 386 230 3363</a>
+        <a href="mailto:info@2gdispatch.com">info@2gdispatch.com</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="two">
+        <div><label for="f-name">YOUR NAME</label><input id="f-name" type="text" autocomplete="name"></div>
+        <div><label for="f-company">COMPANY</label><input id="f-company" type="text" autocomplete="organization"></div>
+        <div><label for="f-phone">PHONE</label><input id="f-phone" type="tel" autocomplete="tel"></div>
+        <div><label for="f-email">EMAIL</label><input id="f-email" type="email" autocomplete="email"></div>
+        <div><label for="f-trailer">TRAILER</label>
+          <select id="f-trailer">
+            <option>9-car hauler</option><option>8-car hauler</option><option>7-car hauler</option>
+            <option>Wedge / smaller</option><option>Enclosed</option>
+          </select>
+        </div>
+        <div><label for="f-trucks">TRUCKS</label>
+          <select id="f-trucks"><option>1</option><option>2–3</option><option>4–9</option><option>10+</option></select>
+        </div>
+      </div>
+      <label for="f-notes">ANYTHING WE SHOULD KNOW</label>
+      <textarea id="f-notes" placeholder="Lanes you prefer, when you can start, who dispatches you now"></textarea>
+      <button class="btn send" id="send" type="button">Send my details</button>
+      <p class="note" id="status">Your details go to us and nobody else.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap ft">
+    <div>2G Dispatch — car hauling dispatch services</div>
+    <div>
+      <a href="tel:+13862303363">+1 386 230 3363</a> &nbsp;·&nbsp;
+      <a href="mailto:info@2gdispatch.com">info@2gdispatch.com</a> &nbsp;·&nbsp;
+      <a href="https://app.2gdispatch.com">Sign in</a>
+    </div>
+  </div>
+</footer>
+
+<a class="callbar" href="tel:+13862303363">Call +1 386 230 3363</a>
+
+<script>
+// ── lane ticker ────────────────────────────────────────────────
+// Example lanes shown for illustration. Edit freely.
+var LANES = [
+  ["Newark, NJ", "Jacksonville, FL", "3 units"],
+  ["Chicago, IL", "Dallas, TX", "7 units"],
+  ["Los Angeles, CA", "Phoenix, AZ", "9 units"],
+  ["Atlanta, GA", "Columbus, OH", "6 units"],
+  ["Houston, TX", "Denver, CO", "4 units"],
+  ["Miami, FL", "Charlotte, NC", "8 units"],
+  ["Seattle, WA", "Salt Lake City, UT", "5 units"],
+  ["Detroit, MI", "Nashville, TN", "7 units"]
+];
+
+(function buildTicker() {
+  var tk = document.getElementById("tk");
+  if (!tk) return;
+  var html = "";
+  for (var pass = 0; pass < 2; pass++) {
+    for (var i = 0; i < LANES.length; i++) {
+      html += '<div class="lane"><b>' + LANES[i][0] + '</b><u>&rarr;</u><b>'
+            + LANES[i][1] + '</b><s>' + LANES[i][2] + '</s></div>';
+    }
+  }
+  tk.innerHTML = html;
+})();
+
+// ── application form ───────────────────────────────────────────
+// Put a Formspree URL here to send without opening the email app.
+// Empty = the visitor's email client opens, pre-filled.
+var ENDPOINT = "";
+
+var FIELDS = ["name", "company", "phone", "email", "trailer", "trucks", "notes"];
+
+function collect() {
+  var out = {};
+  for (var i = 0; i < FIELDS.length; i++) {
+    var el = document.getElementById("f-" + FIELDS[i]);
+    out[FIELDS[i]] = el ? (el.value || "").trim() : "";
+  }
+  return out;
+}
+
+function say(msg) {
+  document.getElementById("status").textContent = msg;
+}
+
+document.getElementById("send").addEventListener("click", function () {
+  var d = collect();
+
+  if (!d.name || !d.phone) {
+    say("Please add at least your name and a phone number.");
+    return;
+  }
+
+  var body = [
+    "Name: " + d.name,
+    "Company: " + d.company,
+    "Phone: " + d.phone,
+    "Email: " + d.email,
+    "Trailer: " + d.trailer,
+    "Trucks: " + d.trucks,
+    "Notes: " + d.notes
+  ].join("\n");
+
+  if (!ENDPOINT) {
+    window.location.href = "mailto:info@2gdispatch.com"
+      + "?subject=" + encodeURIComponent("Carrier application - " + d.name)
+      + "&body=" + encodeURIComponent(body);
+    say("Opening your email app. If nothing happens, call us instead.");
+    return;
+  }
+
+  say("Sending...");
+  fetch(ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(d)
+  }).then(function (r) {
+    say(r.ok ? "Got it. We will call you back shortly."
+             : "That did not send. Please call +1 386 230 3363.");
+  }).catch(function () {
+    say("That did not send. Please call +1 386 230 3363.");
+  });
+});
+</script>
+
+</body>
+</html>
